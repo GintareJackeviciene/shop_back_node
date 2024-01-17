@@ -1,7 +1,9 @@
 require('dotenv').config();
 const express = require ('express');
 const morgan = require ('morgan');
+const chalk = require('chalk');
 const cors = require ('cors');
+const authRouter = require('./routes/authRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -16,7 +18,11 @@ app.use(cors());
 
 app.get('/',(req, res) => {
     res.json('Hello World!');
-})
+});
+
+// use routers
+// /api         /auth/login
+app.use('/api', authRouter);
 
 // 404 not found page api
 app.use((req, res) => {
@@ -26,5 +32,5 @@ app.use((req, res) => {
   });
 
 app.listen(port, () => {
-    console.log(`Sever is listening on port ${port}`);
+    console.log(chalk.blue(`Sever is listening on port ${port}`));
 });
