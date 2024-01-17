@@ -19,10 +19,20 @@ const register = async (req, res, next) => {
     const [resObj, error] = await makeSqlQuery(sql, [email, passwordHash]);
 
     if (error) {
-        console.log('error ===', error);
-
+        console.log('register error ===');
+        next(error);
+        return;
     }
-    res.json(resObj);
+
+    //sekmingas irasymas
+    if(resObj.affectedRows === 1) {
+        res.status(201).json({
+            msg: 'user created',
+            id: resObj.insertId,
+        }); 
+    }
+// kai uzklausa pavyko bet affectedRows !== 1
+res.end();
 }
 
 module.exports = {

@@ -4,6 +4,7 @@ const morgan = require ('morgan');
 const chalk = require('chalk');
 const cors = require ('cors');
 const authRouter = require('./routes/authRoutes');
+const { mainErrroHandler } = require('./middleware');
 
 
 const app = express();
@@ -33,6 +34,9 @@ app.use((req, res) => {
       error: 'Page not found',
     });
   });
+
+  //visos musu klaidos middleware.js faile
+  app.use(mainErrroHandler);
 
 app.listen(port, () => {
     console.log(chalk.blue(`Sever is listening on port ${port}`));
