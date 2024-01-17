@@ -1,2 +1,8 @@
 ### main page
 GET http://localhost:3000/
+
+### login 
+POST http://localhost:3000/api/auth/login
+
+### register 
+POST http://localhost:3000/api/auth/register
