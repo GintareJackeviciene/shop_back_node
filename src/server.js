@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const cors = require ('cors');
 const authRouter = require('./routes/authRoutes');
 
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -19,6 +20,8 @@ app.use(cors());
 app.get('/',(req, res) => {
     res.json('Hello World!');
 });
+
+
 
 // use routers
 // /api         /auth/login
