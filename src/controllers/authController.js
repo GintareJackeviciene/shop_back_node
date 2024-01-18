@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const bcrypt = require('bcryptjs');
 const { makeSqlQuery, makeJWTToken } = require('../helpers');
+const APIError = require('../apiError/ApiError');
 
 const login = async (req, res, next) => {
     //pasiimti email ir plain password
@@ -18,7 +19,7 @@ const login = async (req, res, next) => {
     // ar radom useri
     if (rowsArr.length === 0) {
         console.log('user not found ===');
-        return next({ error: 'user not found' })
+        return next(new APIError('Email not found', 400));
     }
 
     //radom useri
@@ -28,7 +29,7 @@ const login = async (req, res, next) => {
 
 // patikrinti ar sutampa slaptazodiziai
     if(!bcrypt.compareSync(password, passHash)) {
-       return next({error: 'pass or email not match(pass no match)'});
+        return next(new APIError('pass or email not match (pass no match)', 401));
     }
     
 // turim sekme
