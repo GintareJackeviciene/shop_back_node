@@ -23,4 +23,21 @@ Content-Type: application/json
 GET http://localhost:3000/api/items
 
 ### GET single item
-GET http://localhost:3000/api/items/1
+GET http://localhost:3000/api/items/2
+
+### Get single item 
+POST http://localhost:3000/api/items/ 
+Content-Type: application/json
+
+{
+"title": "Train to Madagascar", 
+"description": "Penguins and safari stuff", 
+"price": 2999.99, 
+"rating": 4.05, 
+"stock": 3, 
+"cat_id": 3, 
+"img_url": "https://picsum.photos/id/12/800/600"
+}
+
+### Get single item 
+DELETE http://localhost:3000/api/items/4
