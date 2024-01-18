@@ -1,7 +1,7 @@
 -- create customers table
 
 CREATE TABLE `customers` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -12,14 +12,14 @@ CREATE TABLE `customers` (
 
 
 CREATE TABLE `categories` (
-  `id` int(10) UNSIGNED NOT NULL PRIMARY KEY,
+  `id` int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB;
 
 -- create items table
 
 CREATE TABLE `items` (
-  `id` int(10) UNSIGNED NOT NULL PRIMARY KEY,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `price` DECIMAL(12, 2) NOT NULL,
@@ -28,3 +28,19 @@ CREATE TABLE `items` (
   `cat_id` int(10) UNSIGNED NOT NULL,
   `img_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB;
+
+-- add item 
+
+INSERT INTO `items` (
+  `id`, 
+  `title`, 
+  `description`, 
+  `price`, 
+  `rating`, 
+  `stock`, 
+  `cat_id`, 
+  `img_url`) VALUES 
+(NULL, 
+'Book about HTML', 
+'Very important programing language. ', 
+'10.99', '3.5', '50', '1', 'https://picsum.photos/id/2/800/600');

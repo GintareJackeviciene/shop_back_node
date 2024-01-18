@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const bcrypt = require('bcryptjs');
-const { makeSqlQuery } = require('../helpers');
+const { makeSqlQuery, makeJWTToken } = require('../helpers');
 
 const login = async (req, res, next) => {
     //pasiimti email ir plain password
@@ -22,10 +22,24 @@ const login = async (req, res, next) => {
     }
 
     //radom useri
+    const foundUserInDB =rowsArr[0];
 
-    // patikrinti ar sutampa slaptazodiziai
+    const passHash = foundUserInDB.password;
 
-    res.json(rowsArr);
+// patikrinti ar sutampa slaptazodiziai
+    if(!bcrypt.compareSync(password, passHash)) {
+       return next({error: 'pass or email not match(pass no match)'});
+    }
+    
+// turim sekme
+
+//sugeneruojam token jwt
+
+const token = makeJWTToken({ email: foundUserInDB.email, sub: foundUserInDB.id }); 
+    res.json({
+        msg: 'login success',
+        token,
+    });
 }
 const register = async (req, res, next) => {
     // pasiimti duomenis kuriuos gavom
